@@ -1,0 +1,10 @@
+model,num_params
+ensemblenet,6969481
+ensemblenet1,6969481
+inception_v3,25067490
+mnasnet,1266729
+mobilenet,1781281
+resnet,24034625
+shufflenet,605217
+squeezenet,854337
+vit,85996289

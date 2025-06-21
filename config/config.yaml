@@ -1,0 +1,54 @@
+artifacts_root: artifacts
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  source_kaggle_dataset_id: jessicali9530/caltech256
+  local_data_file: artifacts/data_ingestion/caltech256.zip
+  unzip_dir: artifacts/data_ingestion/extracted_data
+  train_dir: artifacts/data_ingestion/train
+  test_dir: artifacts/data_ingestion/test
+  val_dir: artifacts/data_ingestion/val
+  cleanup_unzip_dir_after_split: true
+
+
+prepare_base_models:
+  root_dir: artifacts/prepare_base_models
+  base_models_output_dir: artifacts/prepare_base_models/feature_extractors
+
+prepare_ensemble_model:
+  root_dir: artifacts/prepare_ensemble_model
+  base_extractors_dir: artifacts/prepare_base_models/feature_extractors
+  ensemble_model_path: artifacts/prepare_ensemble_model/attention_ensemble_model.pth
+
+training:
+  root_dir: artifacts/training
+  last_model_path_template: "artifacts/training/model_{model_name}_last.pth"
+  best_model_path_template: "artifacts/training/model_{model_name}_best.pth"
+  tensorboard_log_dir: artifacts/training/logs
+
+
+test:
+  root_dir: artifacts/test
+  models_dir: artifacts/training
+  model_names:
+    - resnet
+    - mobilenet
+    - squeezenet
+    - shufflenet
+    - inception_v3
+    - mnasnet
+    - vit
+    - ensemblenet
+    - ensemblenet1
+  results_dir: artifacts/test/results
+  last_model_path_template: "artifacts/training/model_{model_name}_last.pth"
+  best_model_path_template: "artifacts/training/model_{model_name}_best.pth"
+  hyperparams_path_template: "artifacts/training/logs/hyperparameters_{model_name}.csv"
+  training_metrics_path_template: "artifacts/training/logs/training_metrics_{model_name}.csv"
+
+
+plot:
+  root_dir: artifacts/plot
+  training_metrics_path_template: "artifacts/training/logs/training_metrics_{model_name}.csv"
+  hyperparams_plots_dir: artifacts/plot/hyperparams_plots
+  test_results_path: artifacts/test/results/results.csv
